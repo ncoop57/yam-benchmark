@@ -22,6 +22,7 @@ import pickle
 import time
 
 from llms.openai_model import OpenAIModel
+from llms.llama_model import LLAMAModel
 from llms.anthropic_model import AnthropicModel
 from llms.mistral_model import MistralModel
 from llms.vertexai_model import VertexAIModel
@@ -29,7 +30,7 @@ from llms.cohere_model import CohereModel
 from llms.moonshot_model import MoonshotAIModel
 
 class LLM:
-    def __init__(self, name="gpt-3.5-turbo", use_cache=True, override_hparams={}):
+    def __init__(self, name="gpt-3.5-turbo", from_pretrained=False, use_cache=True, override_hparams={}):
         self.name = name
         if 'gpt' in name:
             self.model = OpenAIModel(name)
@@ -46,8 +47,9 @@ class LLM:
         elif 'command' in name:
             self.model = CohereModel(name)
         else:
-            raise
-        self.model.hparams.update(override_hparams)
+            self.model = LLAMAModel(name, from_pretrained)
+            # raise
+        # self.model.hparams.update(override_hparams)
 
         self.use_cache = use_cache
         if use_cache:
@@ -95,10 +97,11 @@ class LLM:
 
 #llm = LLM("command")
 #llm = LLM("gpt-3.5-turbo")
-llm = LLM("gpt-4-1106-preview")
+# llm = LLM("gpt-4-1106-preview")
 #llm = LLM("claude-instant-1.2")
 #llm = LLM("mistral-tiny")
 #llm = LLM("gemini-pro", override_hparams={'temperature': 0.3}, use_cache=False)
+llm = LLM("stabilityai/stablelm-2-zephyr-1_6b", from_pretrained=True)
 
 #eval_llm = LLM("gpt-4-1106-preview")
 eval_llm = LLM("gpt-4-0125-preview", override_hparams={'temperature': 0.1})

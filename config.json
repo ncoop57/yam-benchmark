@@ -1,0 +1,27 @@
+{
+    "container": "podman",
+    "hparams": {
+        "temperature": 0.7,
+        "n_ctx": 4096
+    },
+    "llms": {
+        "vertexai": {
+            "project_id": "TODO"
+        },
+        "openai": {
+            "api_key": "TODO"
+        },
+        "mistral": {
+            "api_key": "TODO"
+        },
+        "cohere": {
+            "api_key": "TODO"
+        },
+        "anthropic": {
+            "api_key": "TODO"
+        },
+        "llama_cpp": {
+            "api_key": "TODO"
+        }
+    }
+}
